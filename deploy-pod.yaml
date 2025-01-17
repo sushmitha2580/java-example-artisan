@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment 
+metadata:
+  name: java-tomc
+spec:
+  selector:
+    matchLabels:
+      app: java-tomc
+  replicas: 2 
+  template:
+    metadata:
+      labels:
+        app: java-tomc
+    spec:
+      serviceAccountName: sushmitham
+      imagePullSecrets:
+        - name: ecr-keys
+      containers:
+        - name: java-tomc
+          image: 605134468487.dkr.ecr.ap-south-1.amazonaws.com/demo-repo:dep-ks
+          command: ["/bin/sh","-c","sleep infinity"]
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 80
